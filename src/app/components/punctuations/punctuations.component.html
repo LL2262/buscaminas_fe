@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="jumbotron pad"*ngIf="puntuaciones.length > 0">
+      <div class="row">
+          <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha inicio</th>
+                    <th scope="col">Fecha fin</th>
+                    <th scope="col">Dificultad</th>
+                    <th scope="col">Tiempo total</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let p of puntuaciones; let i = index">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{p.startGame}}</td>
+                    <td>{{p.finishGame}}</td>
+                    <td>{{p.difficulty}}</td>
+                    <td>{{calcularTiempo(p.totalTime)}}</td>
+                    <td>{{p.stateGame ? 'GANADO' : 'PERDIDO'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="puntuaciones.length == 0">
+        <h3>No se registraron jugadas</h3>
+    </div>
+</div>

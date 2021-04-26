@@ -1,0 +1,38 @@
+<div class="row row-flex" style="align-items: center;justify-content: center;">
+  <div class="col-md-5">
+    <div id="first" class="animate__animated animate__bounceInDown animate__fast">
+      <div class="myform form">
+        <div class="row d-flex justify-content-center mb-2">
+          <h4>LOGIN</h4>
+        </div>
+        <form #myForm="ngForm" [formGroup]="loginForm" [ngClass]="{'was-validated': submitted}" (submit)="login()">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email" autocomplete="off" required>
+            <div *ngIf="submitted && !!f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">El correo electrónico es requerido</div>
+              <div *ngIf="f.email.errors.email">El correo electrónico no tiene un formato válido</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" formControlName="password" autocomplete="off" minlength="8"
+              maxlength="12" required>
+            <div *ngIf="submitted && !!f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">La contraseña es requerida</div>
+              <div *ngIf="f.password.errors.minlength">La contraseña debe tener un minimo de 8 caracteres</div>
+              <div *ngIf="f.password.errors.maxlength">La contraseña debe tener un maximo de 12 caracteres</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-secondary btn-block">Login</button>
+          </div>
+        </form>
+        <div class="col-md-12 text-center">
+          <p class="text-center">No estás registrado?</p>
+          <button type="button" class="btn btn-outline-secondary" [routerLink]="'/register'">Registrate aqui</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

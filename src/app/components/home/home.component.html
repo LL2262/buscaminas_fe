@@ -1,0 +1,23 @@
+<div class="row justify-content-center">
+  <div class="col-md-2">
+      <div class="jumbotron pad">
+        <h3 class="text-center">Nuevo Juego</h3>
+        <br>
+        <form #form="ngForm" (submit)="onSubmit()">
+            <div class="row">
+              <div class="col form-group">
+                <label>Seleccione la dificultad</label>
+                <select name="nivel" #NombreCentro="ngModel" [(ngModel)]="nivel" class="form-control" required>
+                    <option *ngFor="let i of niveles" [ngValue]="i" >{{i.dificultad}} {{i.filas}}x{{i.columnas}} Minas: {{i.minas}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                  <button type="submit" class="btn btn-secondary" [disabled]="nivel.dificultad === ''">Comenzar >></button>
+              </div>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>

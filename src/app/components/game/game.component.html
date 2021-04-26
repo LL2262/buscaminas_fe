@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+  <div class="jumbotron pad">
+    <div class="row">
+      <div class="col-md-4 d-flex align-items-center">
+        <img src="assets/img/mina.png" style="width: 30px; height: 30px;">
+        <label style="font-size: 30px; font-weight: bold;">{{minasRestantes}}</label>
+      </div>
+      <div class="col-md-4 text-center">
+        <button name="restart" class="btn btn-lg" (click)="restart()">
+          <i *ngIf="estadoDeJuego == 0" class="far fa-smile" style="font-size: 36px"></i>
+          <i *ngIf="estadoDeJuego == 1" class="far fa-frown" style="font-size: 36px"></i>
+          <i *ngIf="estadoDeJuego == 2" class="far fa-laugh-beam" style="font-size: 36px"></i>
+        </button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover-cells">
+        <tbody>
+          <tr *ngFor="let row of tablero; index as rowIndex;">
+            <td class="celda" *ngFor="let cell of row; index as columnIndex;">
+              <div class="celda-content" (contextmenu)="onRightClick(rowIndex,columnIndex)"
+                (click)="onLeftClick(rowIndex,columnIndex)" [ngClass]="{'selected': cell.descubierta}">
+
+                <span *ngIf="cell.bandera">
+                  <img class="bandera" src="assets/img/bandera.jpg">
+                </span>
+
+                <span *ngIf="cell.esMina && cell.descubierta">
+                  <img class="mina" src="assets/img/mina.jpg">
+                </span>
+
+                <span style="font-size: 24px" *ngIf="!cell.esMina && cell.probabilidad > 0 && cell.descubierta"
+                  [ngClass]="{
+                      'text-primary':cell.probabilidad == 1,
+                      'text-success':cell.probabilidad == 2,
+                      'text-danger':cell.probabilidad == 3
+                    }">
+                  {{cell.probabilidad}}
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-center">
+      <h1 *ngIf="estadoDeJuego == 1" class="text-danger">¡¡GAME OVER!!</h1>
+      <h1 *ngIf="estadoDeJuego == 2" class="text-success">¡¡VICTORIA!!</h1>
+    </div>
+    <app-cronometro></app-cronometro>
+    <div class="col text-center">
+        <button type="submit" class="btn btn-secondary" [routerLink]="['/']"><< Volver</button>
+    </div>
+  </div>
+</div>
